@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			#div1 {
+				position: relative;
+				height: 500px;
+				width: 500px;
+				/* border: 1px solid black; */
+				border: 4px solid rgba(123, 228, 252, 1);
+				border-radius: 50%;
+				transition: transform 1s
+			}
+
+			#div2 {
+				width: 50px;
+				height: 30px;
+				position: absolute;
+				/* top:-15px; */
+				left: calc(50% - 25px);
+				border: 1px solid black;
+				background-color: red;
+				transform: rotate(0deg);
+				transform-origin: 25px 250px;
+			}
+
+			#div3 {
+				width: 50px;
+				height: 30px;
+				position: absolute;
+				//top:15px;
+				left: calc(50% - 25px);
+				border: 1px solid black;
+				background-color: red;
+				transform: rotate(45deg);
+				transform-origin: 25px 250px;
+			}
+
+			#div3 .content {
+				width: 100%;
+				height: 100%;
+				border: 1px solid black;
+				background-color: gray;
+				transform: rotate(-45deg);
+				transition: transform 1s
+			}
+
+			#div4 {
+				width: 50px;
+				height: 30px;
+				position: absolute;
+				border: 1px solid black;
+				background-color: red;
+				//top:15px;
+				left: calc(50% - 25px);
+				transform: rotate(90deg);
+				transform-origin: 25px 250px;
+			}
+
+			#div4 .content {
+				width: 100%;
+				height: 100%;
+				border: 1px solid black;
+				background-color: pink;
+				transform: rotate(-90deg);
+				transition: transform 1s
+			}
+
+			#div5 {
+				width: 50px;
+				height: 30px;
+				position: absolute;
+				//top:15px;
+				left: calc(50% - 25px);
+				border: 1px solid black;
+				background-color: red;
+				transform: rotate(135deg);
+				transform-origin: 25px 250px;
+			}
+
+			#div6 {
+				width: 50px;
+				height: 30px;
+				position: absolute;
+				//top:15px;
+				left: calc(50% - 25px);
+				border: 1px solid black;
+				background-color: red;
+				transform: rotate(180deg);
+				transform-origin: 25px 250px;
+			}
+
+			#div7 {
+				width: 50px;
+				height: 30px;
+				position: absolute;
+				//top:15px;
+				left: calc(50% - 25px);
+				border: 1px solid black;
+				background-color: red;
+				transform: rotate(225deg);
+				transform-origin: 25px 250px;
+			}
+		</style>
+	</head>
+
+	<body>
+
+		<div id="div1">
+			<div id="div2">2</div>
+			<div id="div3">
+				<!-- <div class='content' id='test'>1</div> -->
+			</div>
+			<div id="div4">
+				<!-- <div class='content' id='test1'></div> -->
+			</div>
+			<div id="div4"></div>
+			<div id="div5"></div>
+			<div id="div6">6</div>
+			<div id="div7"></div>
+		</div>
+
+		<hr />
+		<button id='rotateButton'>旋转</button>
+
+		<script>
+			let count = 0
+			const btn = document.getElementById('rotateButton')
+			const circle = document.getElementById('div1')
+			const test = document.getElementById('test')
+			const test1 = document.getElementById('test1')
+			btn.addEventListener('click', function() {
+				count = count - 45
+				// let testCount = -count - 45
+				// let testCount1 = -count - 90
+				circle.style.transform = 'rotate(' + count + 'deg)'
+				// test.style.transform = 'rotate(' + testCount + 'deg)'
+				// test1.style.transform = 'rotate(' + testCount1 + 'deg)'
+			})
+		</script>
+	</body>
+</html>
