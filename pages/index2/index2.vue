@@ -3,7 +3,7 @@
 		<div class="father">
 			<div class="arc_bo">
 				<move-round v-for="(item,index) in list" :minR="15" :bigR="400" :setAngle="item.angle" ref="mRound1"
-					@click="test(index)">
+					@click="itemClick(index)">
 				</move-round>
 				<!-- <move-round :minR="15" :bigR="250" :setAngle="angle3" ref="mRound1"> </move-round> -->
 			</div>
@@ -76,12 +76,13 @@
 				}
 
 			},
-			test(e) {
-				var dif = e - this.curIndex
-				this.moveAngle = dif * 10
-				this.addUpAngle = 0
-				this.toMove()
-				this.curIndex = e
+			itemClick(e) {
+				this.currentIndex=e
+				// var dif = e - this.curIndex
+				// this.moveAngle = dif * 10
+				// this.addUpAngle = 0
+				// this.toMove()
+				// this.curIndex = e
 			},
 			toMove() {
 				var add = (this.moveAngle > 0 ? 1 : -1)
