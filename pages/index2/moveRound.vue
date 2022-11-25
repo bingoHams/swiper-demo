@@ -68,19 +68,19 @@
 			itemClick(){
 				this.$emit('click')
 			},
-            toMove() {
-            	// 调整 累加值，改变速度
-                this.setAngle += 1
-                // timer = raf(this.toMove)
-				timer = window.requestAnimationFrame(this.toMove)
-                // 结束动画
-                if(this.setAngle > this.angle) {
-					window.cancelAnimationFrame(timer)
-                    // caf(timer)
-                    // 也可以根据需要重复执行
-                    // this.setAngle = 0
-                }
-            }
+    //         toMove() {
+    //         	// 调整 累加值，改变速度
+    //             this.setAngle += 1
+    //             // timer = raf(this.toMove)
+				// timer = window.requestAnimationFrame(this.toMove)
+    //             // 结束动画
+    //             if(this.setAngle > this.angle) {
+				// 	window.cancelAnimationFrame(timer)
+    //                 // caf(timer)
+    //                 // 也可以根据需要重复执行
+    //                 // this.setAngle = 0
+    //             }
+    //         }
         }
     }
 </script>

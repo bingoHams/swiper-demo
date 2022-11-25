@@ -9,8 +9,9 @@
 			</div>
 		</div>
 		<view class="u-demo-block">
-			<u-swiper :list="list3" previousMargin="30" :circular="false" nextMargin="30" :autoplay="false" radius="5"
-				bgColor="#ffffff" @click="itemClick" :current="currentIndex" @transitionX="transitionX" :duration="50">
+			<u-swiper :list="list3" :previousMargin="previousMargin" :circular="false" :nextMargin="nextMargin"
+				:autoplay="false" radius="5" bgColor="#ffffff" @click="itemClick" :current="currentIndex"
+				@transitionX="transitionX" :duration="50">
 			</u-swiper>
 		</view>
 		<!-- <span class="start" @click="toMove">开始</span> -->
@@ -44,8 +45,6 @@
 			return {
 				list: [],
 				oldList: [],
-				curIndex: 0,
-				addUpAngle: 0,
 				moveAngle: 0,
 				currentIndex: 0,
 				list3: [
@@ -55,17 +54,21 @@
 					'https://cdn.uviewui.com/uview/swiper/swiper3.png',
 					'https://cdn.uviewui.com/uview/swiper/swiper1.png',
 				],
-				dx: 0,
-				intervalAngle: 10
+				intervalAngle: 10,
+				previousMargin: 30,
+				nextMargin: 30
+
+			}
+		},
+		computed: {
+			swiperDistance() {
+				return 390 - this.previousMargin - this.nextMargin
 			}
 		},
 		methods: {
 			transitionX(e) {
-				// console.log(e);
-				// this.dx = e
 				var add = (e > 0 ? 1 : -1)
-				console.log("angle", (e / 330) * this.intervalAngle);
-				var moveAngle = (e / 330) * this.intervalAngle
+				var moveAngle = (e / this.swiperDistance) * this.intervalAngle
 				this.list.forEach((item, index) => {
 					item.angle = this.oldList[index].angle + moveAngle
 				})
@@ -77,25 +80,7 @@
 
 			},
 			itemClick(e) {
-				this.currentIndex=e
-				// var dif = e - this.curIndex
-				// this.moveAngle = dif * 10
-				// this.addUpAngle = 0
-				// this.toMove()
-				// this.curIndex = e
-			},
-			toMove() {
-				var add = (this.moveAngle > 0 ? 1 : -1)
-				this.addUpAngle += add
-				this.list.forEach(item => {
-					item.angle += add
-				})
-				var timer = window.requestAnimationFrame(this.toMove)
-				console.log(this.addUpAngle, this.moveAngle);
-				if (Math.abs(this.addUpAngle) === Math.abs(this.moveAngle)) {
-					window.cancelAnimationFrame(timer)
-				}
-
+				this.currentIndex = e
 			}
 
 		}
