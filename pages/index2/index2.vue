@@ -1,9 +1,9 @@
 <template>
-	<div style="display: flex;">
+	<div style="display: flex;flex-direction: column;">
 		<div class="father">
 			<div class="arc_bo">
 				<move-round v-for="(item,index) in list" :minR="15" :bigR="400" :setAngle="item.angle" ref="mRound1"
-					@click="itemClick(index)">
+					:backgroundColor="item.minRColor" @click="itemClick(index)">
 				</move-round>
 				<!-- <move-round :minR="15" :bigR="250" :setAngle="angle3" ref="mRound1"> </move-round> -->
 			</div>
@@ -11,8 +11,22 @@
 		<view class="u-demo-block">
 			<u-swiper :list="list3" :previousMargin="previousMargin" :circular="false" :nextMargin="nextMargin"
 				:autoplay="false" radius="5" bgColor="#ffffff" @click="itemClick" :current="currentIndex"
-				@transitionX="transitionX" :duration="50">
+				@transition="transitionX" @change="change">
 			</u-swiper>
+		</view>
+
+		<view class="test11">
+			<swiper :current="currentIndex" @change="swiperChange" :style="{
+							height:mainHeight+'px',
+							width:'750rpx'
+						}" @transition="transitionX">
+				<swiper-item v-for="(item,index) in list">
+					<scroll-view :scroll-y="true" :style="{backgroundColor:item.minRColor}">
+						<text>{{index}}</text>
+					</scroll-view>
+				</swiper-item>
+
+			</swiper>
 		</view>
 		<!-- <span class="start" @click="toMove">开始</span> -->
 	</div>
@@ -29,12 +43,13 @@
 			moveRound
 		},
 		created() {
-			var angle = 100
+			var angle = 100 + this.currentIndex * this.intervalAngle
 			var angle1 = 10
 			for (var i = 0; i < 5; i++) {
 				angle -= angle1
 				this.list.push({
-					"angle": angle
+					"angle": angle,
+					"minRColor": "#7fffd4"
 				})
 				this.oldList.push({
 					"angle": angle
@@ -56,7 +71,8 @@
 				],
 				intervalAngle: 10,
 				previousMargin: 30,
-				nextMargin: 30
+				nextMargin:30,
+				mainHeight: 600
 
 			}
 		},
@@ -66,21 +82,39 @@
 			}
 		},
 		methods: {
+			color16() { //十六进制颜色随机
+				var r = Math.floor(Math.random() * 256);
+				var g = Math.floor(Math.random() * 256);
+				var b = Math.floor(Math.random() * 256);
+				var color = '#' + r.toString(16) + g.toString(16) + b.toString(16);
+				return color;
+			},
 			transitionX(e) {
-				var add = (e > 0 ? 1 : -1)
-				var moveAngle = (e / this.swiperDistance) * this.intervalAngle
-				this.list.forEach((item, index) => {
-					item.angle = this.oldList[index].angle + moveAngle
-				})
-				if (Math.abs(moveAngle) == this.intervalAngle) {
-					this.oldList.forEach(item => {
-						item.angle += this.intervalAngle * add
-					})
-				}
+				var dx = e.detail.dx
+				// console.log(dx);
+				var add = (dx > 0 ? 1 : -1)
+				var moveAngle = (dx / 390) * this.intervalAngle
+				// console.log("moveAngle",moveAngle);
+				// this.list.forEach((item, index) => {
+				// 	item.angle = this.oldList[index].angle + moveAngle
+				// })
+				// if (Math.abs(moveAngle) === this.intervalAngle) {
+				// 	this.oldList.forEach(item => {
+				// 		item.angle += this.intervalAngle * add
+				// 	})
+				// }
 
 			},
 			itemClick(e) {
 				this.currentIndex = e
+			},
+			swiperChange(e) {
+				console.log(e);
+				this.currentIndex = e.detail.current
+			},
+			change(e) {
+				console.log(e);
+				this.currentIndex = e.current
 			}
 
 		}
@@ -122,6 +156,11 @@
 	}
 
 	.u-demo-block {
-		margin-top: 250px;
+		margin-top: 180px;
+		background-color: #f40;
+	}
+
+	.test11 {
+		background-color: #f40;
 	}
 </style>

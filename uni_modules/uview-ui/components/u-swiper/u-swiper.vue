@@ -141,8 +141,8 @@
 			},
 
 			transition(e) {
-				this.$emit('transitionX', e.detail.dx)
-				console.log("transition", e.detail.dx);
+				this.$emit('transition', e)
+				// console.log("transition", e.detail.dx);
 			},
 			animationfinish(e) {
 				this.$emit('animationfinish', e.detail)
