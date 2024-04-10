@@ -13,6 +13,8 @@
 				:autoplay="false" radius="5" bgColor="#ffffff" @click="itemClick" :current="currentIndex"
 				@transition="transitionX" @change="change">
 			</u-swiper>
+
+
 		</view>
 
 		<view class="test11">
